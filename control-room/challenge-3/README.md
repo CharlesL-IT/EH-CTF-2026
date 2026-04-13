@@ -25,7 +25,7 @@ Got Meterpreter (NT AUTHORITY\SYSTEM)
     ↓
 Download flag.zip from C:\Users\blue\Desktop
     ↓
-Extract with password
+Extract with password (The Password located in CCTV Challanges)
     ↓
 Submit flag! 🎉
 ```
