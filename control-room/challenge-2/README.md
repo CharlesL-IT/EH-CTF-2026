@@ -1,6 +1,6 @@
-# Irongate CTF — Part 2b Walkthrough: XSS & Reverse Shell
+# ROCKGATE CCTV CONTROL CTF — Part 2b Walkthrough: XSS & Reverse Shell
 
-**App:** ROCKGATE Correctional CCTV Management System  
+**App:** ROCKGATE CCTV Management System  
 **Stack:** PHP + MySQL  
 **Target:** `http://localhost:8080`  
 **Prerequisite:** Admin session from Part 2a
