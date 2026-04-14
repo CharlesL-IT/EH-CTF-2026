@@ -4,9 +4,9 @@
 
 | Field | Detail |
 |-------|--------|
-| Name |Breach the Control Room Main Server |
+| Name | Corporate Breach - EternalBlue |
 | Category | Exploitation |
-| Points | 200 |
+| Points | 100 |
 | Flag Format | CTF{...} |
 | Target OS | Windows 7 SP1 |
 
@@ -25,7 +25,7 @@ Got Meterpreter (NT AUTHORITY\SYSTEM)
     ↓
 Download flag.zip from C:\Users\blue\Desktop
     ↓
-Extract with password (The Password located in CCTV Challanges)
+Extract with password
     ↓
 Submit flag! 🎉
 ```
@@ -89,7 +89,7 @@ To find the target IP from your Kali Linux:
 
 ```bash
 # Scan your subnet for the target
-nmap -sn IP Range/24
+nmap -sn 192.168.142.0/24
 ```
 
 ---
@@ -213,5 +213,4 @@ CTF{...}
 ```
 
 ---
-
 
