@@ -1,0 +1,15 @@
+[Unit]
+Description=Listen for URG-only TCP packets and remove iptables rule (for CTF use only)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=Simple
+User=root
+Group=root
+ExecStart=/usr/bin/python3 /usr/local/bin/port_rule_edit.py --port <port> --once
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
