@@ -7,7 +7,7 @@ Setup Steps (Target Machine Only):
   a) systemctl status ssh
     i) if not, run enable/start on the service as needed
 2) Add iptables rule for SSH
-  a) sudo iptables -D INPUT -p tcp --dport 22 -j -REJECT --reject-with tcp-reset
+  a) sudo iptables -A INPUT -p tcp --dport 22 -j -REJECT --reject-with tcp-reset
     i) need to add/run iptables-persistent to confirm that this rule remains before CTF starts
   b) Install services and their corresponding files at /etc/systemd/system and /usr/local/bin, respectively
     i) you will need to run sudo systemctl daemon-reload, sudo systemctl enable <service> and sudo systemctl start <service> to set the services up
@@ -44,5 +44,7 @@ IMPORTANT: services will still need to be set up after install
     * sudo systemctl start <service>
   - troubleshooting commands
     * sudo systemctl status <service>
-    * sudo journalctl -u <service> (can modify this one further with flags)
+    * sudo journalctl -u <service>
+      - can modify this one further with flags
+      - recommend -n 20 --no-pager to only get last 20 results
     * sudo systemctl restart <service>
