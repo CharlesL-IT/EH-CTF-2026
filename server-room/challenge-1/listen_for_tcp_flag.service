@@ -7,7 +7,7 @@ Wants=network-online.target
 Type=Simple
 User=root
 Group=root
-ExecStart=/usr/bin/python3 /usr/local/bin/port_rule_edit.py --port <port> --once
+ExecStart=/usr/bin/python3 /usr/local/bin/port_rule_edit.py --port 22 --once
 Restart=on-failure
 RestartSec=5s
 
