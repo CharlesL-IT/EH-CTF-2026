@@ -6,6 +6,10 @@ import string
 
 MAX_CONCURRENT_CLIENTS = 10
 
+# grab flag from seed-cret_flag.txt and store it in a variable
+with open('seed-cret_flag.txt', 'r') as f:
+    FLAG = f.read().strip()
+
 def generate_password():
     """Generate a 15-character password using time-based seed."""
     # remember Bob, choose a more secure method for real applications
@@ -32,7 +36,7 @@ def handle_client(conn, addr):
             user_input = data.decode().strip()
             
             if user_input == password:
-                conn.sendall(b"PrisonCTF{t1m3_15_0f_th3_3553nc3}\n")
+                conn.sendall(FLAG.encode() + b"\n")
                 break
             else:
                 conn.sendall(b"Access Denied. Try again...\n")
