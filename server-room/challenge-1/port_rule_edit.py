@@ -1,10 +1,8 @@
-'''
-Note: Script code was written with the help of HopGPT after pseudocode/design was completed.
-Also reviewed code manually to confirm logic and check for errors.
-'''
-
 #!/usr/bin/env python3
 """
+Note: Script code was written with the help of HopGPT after pseudocode/design was completed.
+Also reviewed code manually to confirm logic and check for errors.
+
 Listen for IPv4 TCP packets to a specific local port where the only TCP flag set is URG.
 When such a packet is observed, remove the iptables rule for that port by using:
     sudo iptables -D INPUT -p tcp --dport <port> --syn -j REJECT --reject-with tcp-reset
@@ -12,7 +10,7 @@ When such a packet is observed, remove the iptables rule for that port by using:
 Run as root (needs permission to modify iptables)
 """
 
-import system
+import sys
 import subprocess
 import argparse
 import time
@@ -20,7 +18,7 @@ from scapy.all import sniff, IP, TCP
 
 def parse_args():
     p = argparse.ArgumentParser(description="Listen for URG-only TCP packet to a port and delete the iptables rule for that port if a packet is received.")
-    p.add_argument("--port", "-p", required=True, help="Destination TCP port to monitor")
+    p.add_argument("--port", "-p", type=int, required=True, help="Destination TCP port to monitor")
     p.add_argument("--iface", "-i", default=None, help="Interface to listen on (default: scapy default)")
     p.add_argument("--source", "-s", default=None, help="Optional source IP to accept (default: any)")
     p.add_argument("--dry-run", action="store_true", help="Don't actually run delete rule command on iptables; just report when matching packet received")
@@ -95,5 +93,5 @@ def main():
     else:
         print(f"[*] Exiting without trigger.")
 
-if __name__ = "__main__":
+if __name__ == "__main__":
     main()
