@@ -1,0 +1,17 @@
+[Unit]
+Description=QOTD Service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=Simple
+User=root
+Group=root
+ExecStart=/usr/bin/socat TCP-LISTEN:17,reuseaddr,fork OPEN:/usr/local/bin/qotd.txt,rdonly
+Restart=always
+RestartSec=2
+StandardOutput=null
+StandardError=journalctl
+
+[Install]
+WantedBy=multi-user.target

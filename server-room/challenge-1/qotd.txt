@@ -1,0 +1,1 @@
+So, you found the hint: SSH is actually active, but before you can start digging around, you'll need to send a connection request to the server first.  Perhaps an *urgent* message will do the trick?
