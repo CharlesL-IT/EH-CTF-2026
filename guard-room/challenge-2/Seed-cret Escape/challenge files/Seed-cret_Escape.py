@@ -3,12 +3,18 @@ import random
 import threading
 import time
 import string
+from pathlib import Path
 
 MAX_CONCURRENT_CLIENTS = 10
 
 # grab flag from seed-cret_flag.txt and store it in a variable
-with open('seed-cret_flag.txt', 'r') as f:
+# the file is in base directory of the challenge, and contains the flag in the format "PrisonCTF{...}"
+BASE_DIR = Path(__file__).resolve().parent
+with (BASE_DIR / 'seed-cret_flag.txt').open('r', encoding='utf-8') as f:
     FLAG = f.read().strip()
+
+if not FLAG:
+    raise RuntimeError("seed-cret_flag.txt is empty. Put the challenge flag in that file.")
 
 def generate_password():
     """Generate a 15-character password using time-based seed."""
@@ -33,10 +39,13 @@ def handle_client(conn, addr):
             data = conn.recv(1024)
             if not data:
                 break
-            user_input = data.decode().strip()
+            # Compare only the first submitted line to avoid extra buffered input mismatches.
+            lines = data.decode(errors='replace').splitlines()
+            user_input = lines[0].strip() if lines else ""
             
             if user_input == password:
-                conn.sendall(FLAG.encode() + b"\n")
+                conn.sendall(b"Access Granted.\n")
+                conn.sendall((FLAG + "\n").encode('utf-8'))
                 break
             else:
                 conn.sendall(b"Access Denied. Try again...\n")
