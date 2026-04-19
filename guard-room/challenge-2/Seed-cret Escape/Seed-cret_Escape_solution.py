@@ -4,6 +4,7 @@ import socket
 import string
 import time
 
+HOST = "31.97.106.219"
 HOST = "localhost"
 PORT = 1337
 WINDOW = 3

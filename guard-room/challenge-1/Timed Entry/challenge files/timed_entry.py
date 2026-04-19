@@ -11,7 +11,7 @@ CHARSET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789{}_!@#$
 # Grab secrets relative to this script so startup does not depend on cwd.
 BASE_DIR = Path(__file__).resolve().parent
 
-with open(BASE_DIR / "timed_entry_password.txt", "r", encoding="utf-8") as f:
+with open(BASE_DIR / "timed_entry_pwd.txt", "r", encoding="utf-8") as f:
     SECRET_PASSWORD = f.read().strip()
 
 # grab the flag from txt file
@@ -43,13 +43,15 @@ class ChallengeHandler(socketserver.StreamRequestHandler):
 
                 password = supplied.decode(errors="replace").strip()
                 if vulnerable_compare(password, SECRET_PASSWORD):
+                    self.wfile.write(b"\nAccess Granted. Please proceed:\n")
                     self.wfile.write((FLAG + "\n").encode())
                     self.wfile.flush()
                     return
                 else:
-                    self.wfile.write(b"Access Denied\n")
+                    self.wfile.write(b"Access Denied. Please try again...\n")
                     self.wfile.flush()
-        except BrokenPipeError:
+        except (BrokenPipeError, ConnectionResetError, ConnectionAbortedError, TimeoutError):
+            # Solvers often disconnect early; treat common socket tear-down errors as normal.
             return
 
 
